@@ -1,9 +1,12 @@
 import { faker } from '@faker-js/faker';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 export const Credentials = {
   validUser: {
-    validUserName: 'standard_user',
-    validPassword: 'secret_sauce',
+    validUserName: process.env.SAUCE_USER || 'standard_user',
+    validPassword: process.env.SAUCE_PASSWORD || 'secret_sauce',
   },
 };
 
