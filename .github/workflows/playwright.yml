@@ -11,14 +11,15 @@ jobs:
     - uses: actions/checkout@v4
     - uses: actions/setup-node@v4
       with:
-        node-version: lts/*
+      
+        node-version: '24' 
     - name: Install dependencies
       run: npm ci
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
     
     - name: Run Playwright tests
-      # Ovde povezujemo tajne sa GitHub-a sa tvojim testovima
+      #hide credentials from the logs
       run: npx playwright test
       env:
         SAUCE_USER: ${{ secrets.SAUCE_USER }}
