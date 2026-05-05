@@ -1,5 +1,7 @@
 import { expect, type Locator, type Page } from '@playwright/test';
 import { BasePage } from './basePage';
+import { PurchaseFlowData } from '../tests/DataTest';
+import { faker } from '@faker-js/faker';
 
 export class CheckoutPage extends BasePage {
   readonly firstNameInput: Locator;
@@ -10,7 +12,6 @@ export class CheckoutPage extends BasePage {
   readonly completeHeader: Locator;
   readonly errorMessage: Locator;
 
-  // Initializes checkout page locators.
   constructor(page: Page) {
     super(page);
     this.firstNameInput = page.locator('[data-test="firstName"]');
@@ -22,12 +23,22 @@ export class CheckoutPage extends BasePage {
     this.errorMessage = page.locator('[data-test="error"]');
   }
 
-  // Fills checkout form and continues to overview step.
+  // Method that fills checkout form with provided data
   async fillCheckoutInfo(firstName: string, lastName: string, zip: string): Promise<void> {
     await this.firstNameInput.fill(firstName);
     await this.lastNameInput.fill(lastName);
     await this.postalCodeInput.fill(zip);
     await this.continueButton.click();
+  }
+
+  // Method that fills checkout form with random data
+  async fillCheckoutWithRandomData(): Promise<void> {
+    const firstName = faker.person.firstName();
+    const lastName = faker.person.lastName();
+    const zip = faker.location.zipCode(PurchaseFlowData.zipPattern);
+
+    // Call the first method to avoid duplicating fill and click logic
+    await this.fillCheckoutInfo(firstName, lastName, zip);
   }
 
   // Clicks Finish to complete the order.

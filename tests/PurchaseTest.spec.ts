@@ -5,9 +5,8 @@ import { Credentials, PurchaseFlowData } from './DataTest';
 import { expect, test } from './baseTest';
 
 // Logs in, adds two items, checks out, and completes a purchase.
-test('Complete purchase with two products', async ({ loginPage, page }) => {
-  const productPage = new ProductPage(page);
-  const checkoutPage = new CheckoutPage(page);
+test('Complete purchase with two products', async ({ loginPage, page,checkoutPage,productPage }) => {
+ 
 
   // Login with valid user.
   await loginPage.login(
@@ -25,10 +24,7 @@ test('Complete purchase with two products', async ({ loginPage, page }) => {
   await productPage.startCheckout();
 
   // Fill checkout information with faker-generated data.
-  const firstName = faker.person.firstName();
-  const lastName = faker.person.lastName();
-  const zip = faker.location.zipCode(PurchaseFlowData.zipPattern);
-  await checkoutPage.fillCheckoutInfo(firstName, lastName, zip);
+  await checkoutPage.fillCheckoutWithRandomData();
 
   // Finish order and assert success confirmation.
   await checkoutPage.finishOrder();
@@ -36,9 +32,8 @@ test('Complete purchase with two products', async ({ loginPage, page }) => {
 });
 
 // Verifies checkout validation when required customer info is missing.
-test('Should show error message when checkout info is missing', async ({ loginPage, page }) => {
-  const productPage = new ProductPage(page);
-  const checkoutPage = new CheckoutPage(page);
+test('Should show error message when checkout info is missing', async ({ loginPage, page ,checkoutPage,productPage}) => {
+ 
 
   await loginPage.login(
     Credentials.validUser.validUserName,
