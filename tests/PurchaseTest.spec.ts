@@ -10,8 +10,8 @@ test('Complete purchase with two products', async ({ loginPage, page,checkoutPag
 
   // Login with valid user.
   await loginPage.login(
-    Credentials.validUser.validUserName,
-    Credentials.validUser.validPassword,
+    process.env.SAUCE_USER as string,
+    process.env.SAUCE_PASSWORD as string,
   );
   await loginPage.assertSuccessfulLogin();
 

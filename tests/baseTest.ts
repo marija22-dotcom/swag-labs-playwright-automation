@@ -16,6 +16,7 @@ type Fixtures = {
 export const test = base.extend<Fixtures>({
   // Creates a LoginPage object for each test.
   loginPage: async ({ page }, use) => {
+    await page.goto(BASE_URL, { waitUntil: 'domcontentloaded' });
     await use(new LoginPage(page));
   },
   checkoutPage: async ({page}, use) => {

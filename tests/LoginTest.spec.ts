@@ -4,9 +4,10 @@ import { Credentials, LoginNegativData } from './DataTest';
 
 // Validates login flow with known valid credentials.
 test('Log in with right credentials', async ({ loginPage }) => {
+    console.log(process.env.SAUCE_USER);
   await loginPage.login(
-    Credentials.validUser.validUserName,
-    Credentials.validUser.validPassword,
+    process.env.SAUCE_USER as string,
+    process.env.SAUCE_PASSWORD as string,
   );
   await loginPage.assertSuccessfulLogin();
 });
