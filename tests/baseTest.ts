@@ -16,7 +16,7 @@ type Fixtures = {
 export const test = base.extend<Fixtures>({
   // Creates a LoginPage object for each test.
   loginPage: async ({ page }, use) => {
-    await page.goto(BASE_URL, { waitUntil: 'domcontentloaded' });
+    await page.goto(BASE_URL, { waitUntil: 'networkidle' });
     await use(new LoginPage(page));
   },
   checkoutPage: async ({page}, use) => {
@@ -27,9 +27,5 @@ export const test = base.extend<Fixtures>({
   }
 });
 
-// Opens the application before each test starts.
-test.beforeEach(async ({ page }) => {
-  await page.goto(BASE_URL, { waitUntil: 'domcontentloaded' });
-});
 
 export { expect };

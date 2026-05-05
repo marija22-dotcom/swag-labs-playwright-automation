@@ -20,6 +20,10 @@ export default defineConfig({
     /* set baseURL to avoid about:blank */
     baseURL: 'https://www.saucedemo.com',
 
+/* set timeout for actions and navigation */
+    actionTimeout: 10_000,       
+    navigationTimeout: 15_000,  
+
     /* helps with debugging locally */
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
@@ -31,8 +35,8 @@ export default defineConfig({
       name: 'chromium',
       use: { 
         ...devices['Desktop Chrome'],
-        /* set headless: false to see how the test is running locally */
-        headless: false 
+        /* set headless: true if running on CI, false if running locally */
+        headless: !!process.env.CI 
       },
     }
   ],
