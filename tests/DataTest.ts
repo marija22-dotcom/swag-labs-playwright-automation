@@ -5,8 +5,8 @@ dotenv.config();
 
 export const Credentials = {
   validUser: {
-    validUserName: process.env.SAUCE_USER || 'standard_user',
-    validPassword: process.env.SAUCE_PASSWORD || 'secret_sauce',
+    validUserName: process.env.SAUCE_USER || '',
+    validPassword: process.env.SAUCE_PASSWORD || '',
   },
 };
 
